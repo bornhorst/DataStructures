@@ -1,12 +1,4 @@
-
-#include <stdio.h>
-#include <stdlib.h>
-
-// node structure
-struct Node {
-	int data;
-	struct Node* next;
-};
+#include "simpleList.h"
 
 // function for initializing a new list
 struct Node* startList(int value) {
@@ -17,6 +9,54 @@ head->next = NULL;
 return head;
 
 }
+
+// function that removes all duplicates from a list
+struct Node* deleteDuplicate(struct Node* head) {
+
+struct Node* current = head;
+struct Node* value = head;
+
+if(!head)
+	return head;
+else {
+	while(1) {
+		while(current->next) {
+			current = current->next;
+			if(value->data == current->data)
+				head = deleteItem(head, current->data);
+		};	
+		if(value->next) {
+			value = value->next;
+			current = value;
+		} else
+			return head;
+	};
+};
+
+};
+
+// function for deleting specific value from list
+struct Node* deleteItem(struct Node* head, int value) {
+
+struct Node* current = head;
+struct Node* previous = head;
+
+if(!head)
+	return head;
+else if(head->data == value) 
+	return head->next;
+else {
+	while(current) {
+		if(current->data == value) {
+			previous->next = current->next;
+			return head;
+		};
+		previous = current;
+		current = current->next;
+	};
+};
+
+};
 
 // function for appending to a list
 void appendList(struct Node* head, int value) {
@@ -66,24 +106,3 @@ while(head) {
 
 };
 
-
-
-int main(void) {
-
-// create a head node
-struct Node* head = NULL;
-
-// build simple list
-head = startList(1);
-appendList(head, 2);
-appendList(head, 3);
-
-// print list values
-printList(head);
-
-// free memory
-freeList(head);
-
-return 0;
-
-};
