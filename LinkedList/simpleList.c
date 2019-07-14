@@ -8,6 +8,7 @@ struct Node {
 	struct Node* next;
 };
 
+// function for initializing a new list
 struct Node* startList(int value) {
 
 struct Node* head = (struct Node*)malloc(sizeof(struct Node));
@@ -17,6 +18,7 @@ return head;
 
 }
 
+// function for appending to a list
 void appendList(struct Node* head, int value) {
 
 if(!head) 
@@ -39,6 +41,7 @@ else {
 
 };
 
+// function for displaying the list
 void printList(struct Node* head) {
 
 struct Node* current = head;
@@ -50,6 +53,7 @@ while(current) {
 
 };
 
+// function for freeing list memory
 void freeList(struct Node* head) {
 
 struct Node* temp;
@@ -62,9 +66,11 @@ while(head) {
 
 };
 
+
+
 int main(void) {
 
-// create a head pointer and a current data pointer
+// create a head node
 struct Node* head = NULL;
 
 // build simple list
@@ -72,8 +78,10 @@ head = startList(1);
 appendList(head, 2);
 appendList(head, 3);
 
+// print list values
 printList(head);
 
+// free memory
 freeList(head);
 
 return 0;
