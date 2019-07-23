@@ -1,83 +1,87 @@
 #include "simpleList.h"
 
-// function for initializing a new list
-struct Node* startList(int value) {
-
-struct Node* head = (struct Node*)malloc(sizeof(struct Node));
-head->data = value;
-head->next = NULL;
-return head;
-
-}
-
 // function that removes all duplicates from a list
-struct Node* deleteDuplicate(struct Node* head) {
+void deleteDuplicate(struct Node** head) {
 
-struct Node* current = head;
-struct Node* value = head;
+struct Node* current = NULL;
+struct Node* temp = *head;
+int count = 0;
 
-if(!head)
-	return head;
-else {
-	while(1) {
-		while(current->next) {
-			current = current->next;
-			if(value->data == current->data)
-				head = deleteItem(head, current->data);
-		};	
-		if(value->next) {
-			value = value->next;
-			current = value;
-		} else
-			return head;
+if(!(*head))
+	return;
+
+while(1) {
+	count = 0;
+	current = temp->next;
+
+	if(!temp->next)
+		return;
+ 
+	while(current) {
+		if(current->data == temp->data) 
+			++count;
+		current = current->next;
 	};
+
+	if(count > 0) {
+		for(int i = 0; i < count; i++) 
+			deleteItem(head, temp->data);
+		temp = *head;
+	} else
+		temp = temp->next;
 };
 
 };
 
 // function for deleting specific value from list
-struct Node* deleteItem(struct Node* head, int value) {
+void deleteItem(struct Node** head, int value) {
 
-struct Node* current = head;
-struct Node* previous = head;
+struct Node* current = *head;
+struct Node* temp = NULL;
 
-if(!head)
-	return head;
-else if(head->data == value) 
-	return head->next;
-else {
-	while(current) {
-		if(current->data == value) {
-			previous->next = current->next;
-			return head;
-		};
-		previous = current;
-		current = current->next;
-	};
-};
-
-};
-
-// function for appending to a list
-void appendList(struct Node* head, int value) {
-
-if(!head) 
+if(!(*head))
 	return;
-else {
-	struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
-	newNode->data = value;
-	struct Node* current = head;
 
-	while(current) {
-		if(!current->next) {
-			current->next = newNode;
-			current = current->next;
-			current->next = NULL;
+if((*head)->data == value) {
+	temp = (*head)->next;
+	free(*head);
+	*head = temp;
+	return;
+} else {
+	while(current->next) {
+		if(current->next->data == value) {
+			temp = current->next;
+			current->next = temp->next;
+			free(temp);
 			return;
 		};
 		current = current->next;
 	};
+}; 
+		
 };
+
+// function for adding to list
+void appendList(struct Node** head, int value) {
+
+struct Node* current = *head;
+struct Node* newNode = malloc(sizeof(struct Node));
+
+if(!*head) {
+	newNode->data = value;
+	newNode->next = *head;
+	*head = newNode;
+	return;
+};
+
+while(current->next) 
+	current = current->next;
+
+current->next = newNode;
+current->next->data = value;
+current->next->next = NULL;
+
+return;
 
 };
 

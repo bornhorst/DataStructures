@@ -9,11 +9,10 @@ struct Node {
 };
 
 // function prototypes
-struct Node* startList(int);
-void appendList(struct Node*, int);
-struct Node* deleteItem(struct Node*, int);
+void appendList(struct Node**, int);
+void deleteItem(struct Node**, int);
 void printList(struct Node*);
 void freeList(struct Node*);
-struct Node* deleteDuplicate(struct Node*);
+void deleteDuplicate(struct Node**);
 
 
