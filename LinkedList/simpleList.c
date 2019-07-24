@@ -1,34 +1,46 @@
+#include <string.h>
+
 #include "simpleList.h"
 
 // function that removes all duplicates from a list
 void deleteDuplicate(struct Node** head) {
 
 struct Node* current = NULL;
-struct Node* temp = *head;
+struct Node* temp = (*head);
+
+int dupVal = 0;
 int count = 0;
+int downCount = 0;
 
 if(!(*head))
 	return;
 
 while(1) {
-	count = 0;
-	current = temp->next;
-
 	if(!temp->next)
 		return;
+
+	count = 0;
+	current = temp->next;
  
 	while(current) {
 		if(current->data == temp->data) 
 			++count;
 		current = current->next;
 	};
+	
+	dupVal = temp->data;
+	downCount = count;
 
-	if(count > 0) {
-		for(int i = 0; i < count; i++) 
-			deleteItem(head, temp->data);
-		temp = *head;
-	} else
+	while(downCount > 0) {
+		deleteItem(head, dupVal);
+		--downCount;
+	}
+
+	if(count > 0)
+		temp = (*head);
+	else
 		temp = temp->next;
+
 };
 
 };
@@ -36,16 +48,16 @@ while(1) {
 // function for deleting specific value from list
 void deleteItem(struct Node** head, int value) {
 
-struct Node* current = *head;
+struct Node* current = (*head);
 struct Node* temp = NULL;
 
 if(!(*head))
 	return;
 
 if((*head)->data == value) {
-	temp = (*head)->next;
-	free(*head);
-	*head = temp;
+	temp = (*head);
+	(*head) = (*head)->next;
+	free(temp);
 	return;
 } else {
 	while(current->next) {
@@ -64,24 +76,22 @@ if((*head)->data == value) {
 // function for adding to list
 void appendList(struct Node** head, int value) {
 
-struct Node* current = *head;
-struct Node* newNode = malloc(sizeof(struct Node));
+struct Node* current = (*head);
+struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
 
-if(!*head) {
+if(!(*head)) {
 	newNode->data = value;
-	newNode->next = *head;
-	*head = newNode;
+	newNode->next = (*head);
+	(*head) = newNode;
 	return;
 };
 
 while(current->next) 
 	current = current->next;
 
+newNode->data = value;
 current->next = newNode;
-current->next->data = value;
-current->next->next = NULL;
-
-return;
+newNode->next = NULL;
 
 };
 

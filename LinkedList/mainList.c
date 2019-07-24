@@ -14,7 +14,7 @@ int selection = 0;
 // input buffer
 char buffer[BUFFSIZE];
 char command[BUFFSIZE];
-int data;
+int data = 0;
 
 while(1) {
 	selection = 0;
