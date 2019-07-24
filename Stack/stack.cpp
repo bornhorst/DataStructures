@@ -21,9 +21,9 @@ void Stack::push(Node** head, int data) {
 	// create the new node
 	Node* stackNode = newNode(data);
 	// add node to top of stack
-	stackNode->next = *head;
+	stackNode->next = (*head);
 	// point head back to the top
-	*head = stackNode;
+	(*head) = stackNode;
 	cout << data << " was pushed on stack\n";
 };
 
@@ -32,13 +32,13 @@ int Stack::pop(Node** head) {
 	if(isEmpty(*head))
 		return 0;
 	// point to the top node
-	Node* temp = *head;
+	Node* temp = (*head);
 	// move head down one node
-	*head = (*head)->next;
+	(*head) = (*head)->next;
 	// save the data for peeking
 	int itemPopped = temp->data;
 	// free the popped nodes memory from the top
-	free(temp);
+	delete(temp);
 	return itemPopped;
 };
 

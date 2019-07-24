@@ -18,6 +18,8 @@ stack.pop(&head);
 cout << "Top after pop is " << stack.peek(head) << endl;
 stack.pop(&head);
 cout << "Top after pop is " << stack.peek(head) << endl;
+stack.pop(&head);
+cout << "Top after pop is " << stack.peek(head) << endl;
 
 return 0;
 
