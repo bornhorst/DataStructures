@@ -22,6 +22,12 @@ bst.insertTree(80);
 // display the tree
 bst.displayTree();
 
+// display the min
+bst.displayMin();
+
+// display the max
+bst.displayMax();
+
 return 0;
 
 };

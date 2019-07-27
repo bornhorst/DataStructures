@@ -25,6 +25,16 @@ void BSTree::displayTree(void) {
 	displayInOrder(Root);
 };
 
+// display minimum wrapper
+void BSTree::displayMin() {
+	cout << displayMin(Root) << endl;
+};
+
+// display maximum wrapper
+void BSTree::displayMax() {
+	cout << displayMax(Root) << endl;
+};
+
 // create a new node
 struct Node* BSTree::newNode(int item) {
 	// create a new node
@@ -63,6 +73,22 @@ void BSTree::displayInOrder(struct Node* root) {
 		displayInOrder(root->right);
 	};
 };
+
+// display the minimum
+int BSTree::displayMin(struct Node* root) {
+	if(root->left) 
+		displayMin(root->left);
+	else
+		return root->data; 
+};
+
+// display the maximum
+int BSTree::displayMax(struct Node* root) {
+	if(root->right)
+		displayMax(root->right);
+	else
+		return root->data;
+}; 
 
 // destroy the tree
 void BSTree::deleteTree(struct Node* node) {
