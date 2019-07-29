@@ -35,6 +35,50 @@ void BSTree::displayMax() {
 	displayMax(Root);
 };
 
+// overloaded delete node function
+struct Node* BSTree::deleteNode(int value) {
+	Root = deleteNode(Root, value);
+};
+
+// delete a specific node from the tree
+struct Node* BSTree::deleteNode(struct Node* root, int value) {
+	// no tree
+	if(!root)
+		return root;
+	// check the left until data matches
+	if(value < root->data)
+		root->left = deleteNode(root->left, value);
+	// check the right until data matches
+	else if(value > root->data)
+		root->right = deleteNode(root->right, value);
+	// data matches the root
+	else {
+		// node with only a single child or
+		// no children
+		if(!root->left) {
+			struct Node* temp = root->right;
+			delete(root);
+			return temp;
+		} else if(!root->right) {
+			struct Node* temp = root->left;
+			delete(root);
+			return temp;
+		}
+
+		// node with two children - replace node with inorder successor
+		struct Node* current = root->right;
+		while(current->left)
+			current = current->left;
+		
+		// copy inorder successor to root
+		root->data = current->data;
+		
+		// delete inorder successor
+		root->right = deleteNode(root->right, current->data);
+	}
+	return root;			
+};
+
 // create a new node
 struct Node* BSTree::newNode(int item) {
 	// create a new node

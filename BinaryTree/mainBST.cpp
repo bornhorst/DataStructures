@@ -28,6 +28,12 @@ bst.displayMin();
 // display the max
 bst.displayMax();
 
+// delete some nodes
+bst.deleteNode(50);
+bst.deleteNode(20);
+bst.deleteNode(70);
+bst.displayInOrder();
+
 return 0;
 
 };

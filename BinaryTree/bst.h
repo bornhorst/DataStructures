@@ -22,6 +22,7 @@ public:
 	void displayInOrder(void);
 	void displayMin(void);
 	void displayMax(void);
+	struct Node* deleteNode(int);
 private:
 	// data members
 	Node* Root;
@@ -32,5 +33,6 @@ private:
 	void displayInOrder(struct Node*);
 	void displayMin(struct Node*);
 	void displayMax(struct Node*);
+	struct Node* deleteNode(struct Node*, int);
 	void deleteTree(struct Node*);
 };
