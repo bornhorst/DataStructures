@@ -18,8 +18,8 @@ public:
 	BSTree();
 	~BSTree();
 	void rootTree(int);
-	void insertTree(int);
-	void displayTree(void);
+	struct Node* insertNode(int);
+	void displayInOrder(void);
 	void displayMin(void);
 	void displayMax(void);
 private:
@@ -28,9 +28,9 @@ private:
 
 	// functions
 	struct Node* newNode(int);
-	struct Node* insert(struct Node*, int);
+	struct Node* insertNode(struct Node*, int);
 	void displayInOrder(struct Node*);
-	int displayMin(struct Node*);
-	int displayMax(struct Node*);
+	void displayMin(struct Node*);
+	void displayMax(struct Node*);
 	void deleteTree(struct Node*);
 };

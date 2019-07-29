@@ -6,33 +6,33 @@ BST class functions
 
 // constructor
 BSTree::BSTree() {
-	// initialize
+	// initialize root
 	Root = NULL;
 };
 
 // root the tree
 void BSTree::rootTree(int item) {
-	Root = insert(Root, item);
+	Root = insertNode(Root, item);
 };
 
-// insert wrapper
-void BSTree::insertTree(int item) {
-	insert(Root, item);
+// overloaded insert function
+struct Node* BSTree::insertNode(int item) {
+	insertNode(Root, item);
 };
 
-// display wrapper
-void BSTree::displayTree(void) {
+// overloaded display function
+void BSTree::displayInOrder(void) {
 	displayInOrder(Root);
 };
 
-// display minimum wrapper
+// overloaded display min function
 void BSTree::displayMin() {
-	cout << displayMin(Root) << endl;
+	displayMin(Root);
 };
 
-// display maximum wrapper
+// overloaded display max function
 void BSTree::displayMax() {
-	cout << displayMax(Root) << endl;
+	displayMax(Root);
 };
 
 // create a new node
@@ -47,7 +47,7 @@ struct Node* BSTree::newNode(int item) {
 };
 
 // insert a node into the tree
-struct Node* BSTree::insert(struct Node* node, int item) {
+struct Node* BSTree::insertNode(struct Node* node, int item) {
 	// check if the node is empty
 	// if it is then create one
 	if(!node)
@@ -55,9 +55,9 @@ struct Node* BSTree::insert(struct Node* node, int item) {
 
 	// otherwise insert the node into the tree
 	if(item < node->data)
-		node->left = insert(node->left, item);
+		node->left = insertNode(node->left, item);
 	else if(item > node->data)
-		node->right = insert(node->right, item);
+		node->right = insertNode(node->right, item);
 
 	return node;
 
@@ -75,19 +75,19 @@ void BSTree::displayInOrder(struct Node* root) {
 };
 
 // display the minimum
-int BSTree::displayMin(struct Node* root) {
+void BSTree::displayMin(struct Node* root) {
 	if(root->left) 
 		displayMin(root->left);
 	else
-		return root->data; 
+		cout << root->data << endl;		
 };
 
 // display the maximum
-int BSTree::displayMax(struct Node* root) {
+void BSTree::displayMax(struct Node* root) {
 	if(root->right)
 		displayMax(root->right);
 	else
-		return root->data;
+		cout << root->data << endl;
 }; 
 
 // destroy the tree
