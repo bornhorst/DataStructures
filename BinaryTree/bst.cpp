@@ -57,10 +57,12 @@ struct Node* BSTree::deleteNode(struct Node* root, int value) {
 		// no children
 		if(!root->left) {
 			struct Node* temp = root->right;
+			cout << "Deleted: " << root->data << endl;
 			delete(root);
 			return temp;
 		} else if(!root->right) {
 			struct Node* temp = root->left;
+			cout << "Deleted: " << root->data << endl;
 			delete(root);
 			return temp;
 		}
@@ -85,6 +87,7 @@ struct Node* BSTree::newNode(int item) {
 	struct Node* bstNode = new Node();
 	// store data in the node
 	bstNode->data = item;
+	cout << "Inserted: " << bstNode->data << endl;
 	// nothing is attached further down yet
 	bstNode->left = bstNode->right = NULL;
 	return bstNode;
@@ -104,12 +107,10 @@ struct Node* BSTree::insertNode(struct Node* node, int item) {
 		node->right = insertNode(node->right, item);
 
 	return node;
-
 };
 
 // display contents of tree in order
 void BSTree::displayInOrder(struct Node* root) {
-	// check for empty tree
 	// if not empty then display the tree data in order
 	if(root) {
 		displayInOrder(root->left);
@@ -120,10 +121,10 @@ void BSTree::displayInOrder(struct Node* root) {
 
 // display the minimum
 void BSTree::displayMin(struct Node* root) {
-	if(root->left) 
+	if(root->left)
 		displayMin(root->left);
 	else
-		cout << root->data << endl;		
+		cout << "Min: " << root->data << endl;		
 };
 
 // display the maximum
@@ -131,7 +132,7 @@ void BSTree::displayMax(struct Node* root) {
 	if(root->right)
 		displayMax(root->right);
 	else
-		cout << root->data << endl;
+		cout << "Max: " << root->data << endl;
 }; 
 
 // destroy the tree
