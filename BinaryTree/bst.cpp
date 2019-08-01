@@ -38,6 +38,7 @@ void BSTree::displayMax() {
 // overloaded delete node function
 struct Node* BSTree::deleteNode(int value) {
 	Root = deleteNode(Root, value);
+	cout << "Deleted: " << value << endl;
 };
 
 // delete a specific node from the tree
@@ -57,12 +58,10 @@ struct Node* BSTree::deleteNode(struct Node* root, int value) {
 		// no children
 		if(!root->left) {
 			struct Node* temp = root->right;
-			cout << "Deleted: " << root->data << endl;
 			delete(root);
 			return temp;
 		} else if(!root->right) {
 			struct Node* temp = root->left;
-			cout << "Deleted: " << root->data << endl;
 			delete(root);
 			return temp;
 		}

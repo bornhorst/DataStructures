@@ -30,9 +30,15 @@ bst.displayMax();
 
 // delete some nodes
 bst.deleteNode(50);
-bst.deleteNode(20);
-bst.deleteNode(70);
+bst.deleteNode(10);
+bst.deleteNode(80);
 bst.displayInOrder();
+
+// display the min
+bst.displayMin();
+
+// display the max
+bst.displayMax();
 
 return 0;
 
